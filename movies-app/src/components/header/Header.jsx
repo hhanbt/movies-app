@@ -3,11 +3,10 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
 import { useNavigate, useLocation } from "react-router-dom";
-
-import "./style.scss";
-
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/movix-logo.svg";
+
+import "./style.scss";
 
 const Header = () => {
     const [show, setShow] = useState("top");
@@ -17,14 +16,12 @@ const Header = () => {
     const [showSearch, setShowSearch] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
-    const [searchResults, setSearchResults] = useState([]);
 
     useEffect(() => {
       window.scrollTo(0, 0);
     }, [location])
 
     const controlNavbar = () => {
-      //console.log(window.scrollY);
       if (window.scrollY > 200) {
         if(window.scrollY > lastScrollY && !mobileMenu) {
           setShow("hide");
@@ -44,30 +41,14 @@ const Header = () => {
       }
     }, [lastScrollY])
     
-    // const searchQueryHandler =  (event) => {
-    //   if(event.key === "Enter" && query.length > 0) {
-    //     navigate(`/search/${query}`);
-    //     setTimeout(() => {
-    //       setShowSearch(false);
-    //     }, 1000);
-    //   }
-    // };
-
-    const searchQueryHandler = async (event) => {
-      if (event.key === "Enter" && query.length > 0) {
-        try {
-          const response = await fetch(
-            `https://api.themoviedb.org/3/search/movie?query=${query}&language=en-US&page=1`,
-            options
-          );
-          const data = await response.json();
-          setSearchResults(data.results);
-          setShowSearch(true);
-        } catch (error) {
-          console.error(error);
-        }
+    const searchQueryHandler =  (event) => {
+      if(event.key === "Enter" && query.length > 0) {
+        navigate(`/search/${query}`);
+        setTimeout(() => {
+          setShowSearch(false);
+        }, 1000);
       }
-    }
+    };
 
     const openSearch = () => {
       setMobileMenu(false);
@@ -118,7 +99,10 @@ const Header = () => {
                 <input 
                   type="text" 
                   placeholder='Search for a movie or TV show...' 
-                  onChange={(e) => setQuery(e.target.value)}
+                  onChange={(e) => {
+                    setQuery(e.target.value)
+                    
+                  }}
                   onKeyUp={searchQueryHandler}
                 />
                 <VscChromeClose onClick={() => setShowSearch(false)}/>
