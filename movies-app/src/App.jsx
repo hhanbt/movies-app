@@ -34,7 +34,7 @@ function App() {
           // profile: res.images.secure_base_url + "original", 
         }
 
-        dispatch(getApiConfiguration(url));
+        dispatch(getApiConfiguration(res));
       });
   };
 
