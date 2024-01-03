@@ -1,0 +1,22 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "La Hieu",
+            "password": "deptraiso1",
+            "email": "lahieutx@gmail.com"
+        },
+        {
+            "name": "Ta Khanh Tung",
+            "email": "tungtk@gmail.com",
+            "password": "123456",
+            "id": 2
+        },
+        {
+            "name": "hieula",
+            "email": "lahieux@gmail.com",
+            "password": "123456",
+            "id": 3
+        }
+    ]
+}
